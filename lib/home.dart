@@ -6,31 +6,61 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            color: Colors.red,
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Good Morning, Caio'),
-                Text('Dom, Set 03 - 09'),
-                Text('Progress Bar'),
-                Text('Table'),
-              ],
+      backgroundColor: Colors.black87,
+      body: Container(
+        padding: const EdgeInsets.all(100),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 3,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Good Morning, Caio',
+                    style: TextStyle(color: Colors.white, fontSize: 50),
+                  ),
+                  const Text(
+                    'Dom, Set 03 - 09',
+                    style: TextStyle(color: Colors.white, fontSize: 50),
+                  ),
+                  const SizedBox(height: 30),
+                  const LinearProgressIndicator(
+                    value: 0.74,
+                    backgroundColor: Colors.blue,
+                    valueColor: AlwaysStoppedAnimation(Colors.red),
+                  ),
+                  Container(
+                    margin: const EdgeInsetsDirectional.only(top: 10),
+                    alignment: Alignment.centerRight,
+                    child: const Text(
+                      '74% achivied',
+                      textAlign: TextAlign.right,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  const Text(
+                    'Table',
+                    //https://api.flutter.dev/flutter/material/DataTable-class.html
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Container(
-            color: Colors.blue,
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Side Bar'),
-              ],
+            const Expanded(
+              flex: 1,
+              child: Column(
+                children: [
+                  Text(
+                    'Side Bar',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
