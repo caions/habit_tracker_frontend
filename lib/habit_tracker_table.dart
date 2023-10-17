@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habit_tracker_frontend/components/custom_checkbox.dart';
 
 class HabitTrackerTable extends StatelessWidget {
   const HabitTrackerTable({super.key});
@@ -85,26 +86,26 @@ class HabitTrackerTable extends StatelessWidget {
           color: MaterialStatePropertyAll(Colors.white),
           cells: <DataCell>[
             DataCell(Text('Run')),
-            DataCell(Text('[]')),
-            DataCell(Text('[]')),
-            DataCell(Text('[]')),
-            DataCell(Text('[]')),
-            DataCell(Text('[]')),
-            DataCell(Text('[]')),
-            DataCell(Text('[]')),
+            DataCell(CustomCheckbox()),
+            DataCell(CustomCheckbox()),
+            DataCell(CustomCheckbox()),
+            DataCell(CustomCheckbox()),
+            DataCell(CustomCheckbox()),
+            DataCell(CustomCheckbox()),
+            DataCell(CustomCheckbox()),
           ],
         ),
         DataRow(
           color: MaterialStatePropertyAll(Colors.white),
           cells: <DataCell>[
             DataCell(Text('Study')),
-            DataCell(Text('[]')),
-            DataCell(Text('[]')),
-            DataCell(Text('[]')),
-            DataCell(Text('[]')),
-            DataCell(Text('[]')),
-            DataCell(Text('[]')),
-            DataCell(Text('[]')),
+            DataCell(CustomCheckbox()),
+            DataCell(CustomCheckbox()),
+            DataCell(CustomCheckbox()),
+            DataCell(CustomCheckbox()),
+            DataCell(CustomCheckbox()),
+            DataCell(CustomCheckbox()),
+            DataCell(CustomCheckbox()),
           ],
         ),
       ],
