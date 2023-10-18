@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:habit_tracker_frontend/components/custom_checkbox.dart';
+import 'components/custom_checkbox.dart';
 
 class HabitTrackerTable extends StatelessWidget {
   const HabitTrackerTable({super.key});
