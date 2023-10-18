@@ -6,6 +6,7 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
           'Good Morning, Caio',
@@ -13,7 +14,7 @@ class Header extends StatelessWidget {
         ),
         const Text(
           'Dom, Set 03 - 09',
-          style: TextStyle(color: Colors.white, fontSize: 50),
+          style: TextStyle(color: Colors.white, fontSize: 20),
         ),
         const SizedBox(height: 30),
         const LinearProgressIndicator(

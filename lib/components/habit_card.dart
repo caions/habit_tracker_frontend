@@ -9,21 +9,47 @@ class HabitCard extends StatefulWidget {
 }
 
 class _HabitCardState extends State<HabitCard> {
+  bool isCompleted = false;
+
   @override
   Widget build(BuildContext context) {
+    void toggleCompleted() {
+      setState(() {
+        isCompleted = !isCompleted;
+      });
+    }
+
     return Center(
-      child: Card(
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: Theme.of(context).colorScheme.outline,
+      child: GestureDetector(
+        onTap: toggleCompleted,
+        child: Card(
+          elevation: 0,
+          color: isCompleted ? Colors.purple : Colors.white,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(12)),
           ),
-          borderRadius: const BorderRadius.all(Radius.circular(12)),
-        ),
-        child: SizedBox(
-          width: 300,
-          height: 100,
-          child: Center(child: Text(widget.title)),
+          child: SizedBox(
+            width: 300,
+            height: 70,
+            child: Stack(
+              children: [
+                Center(
+                  child: Text(widget.title,
+                      style: TextStyle(
+                          color: isCompleted ? Colors.white : Colors.black)),
+                ),
+                Positioned(
+                  bottom: 7,
+                  right: 20,
+                  child: Text(isCompleted ? 'Completed' : '',
+                      style: TextStyle(
+                          fontStyle: FontStyle.italic,
+                          fontSize: 10,
+                          color: isCompleted ? Colors.white : Colors.black)),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );

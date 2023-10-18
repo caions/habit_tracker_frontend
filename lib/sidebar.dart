@@ -13,13 +13,9 @@ class SideBar extends StatelessWidget {
           'Tue, Oct 17',
           style: TextStyle(color: Colors.white),
         ),
-        HabitCard(
-          title: 'Run',
-        ),
+        HabitCard(title: 'Run'),
         HabitCard(title: 'Study'),
-        HabitCard(
-          title: 'Work',
-        )
+        HabitCard(title: 'Work')
       ],
     );
   }
