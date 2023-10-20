@@ -13,7 +13,7 @@ class Header extends StatelessWidget {
           style: TextStyle(color: Colors.white, fontSize: 50),
         ),
         const Text(
-          'Dom, Set 03 - 09',
+          'Fri, Oct 20 - 09',
           style: TextStyle(color: Colors.white, fontSize: 20),
         ),
         const SizedBox(height: 30),

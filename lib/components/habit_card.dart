@@ -21,33 +21,53 @@ class _HabitCardState extends State<HabitCard> {
 
     return Center(
       child: GestureDetector(
-        onTap: toggleCompleted,
+        onDoubleTap: toggleCompleted,
         child: Card(
           elevation: 0,
           color: isCompleted ? Colors.purple : Colors.white,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(12)),
           ),
-          child: SizedBox(
-            width: 300,
-            height: 70,
-            child: Stack(
-              children: [
-                Center(
-                  child: Text(widget.title,
-                      style: TextStyle(
-                          color: isCompleted ? Colors.white : Colors.black)),
-                ),
-                Positioned(
-                  bottom: 7,
-                  right: 20,
-                  child: Text(isCompleted ? 'Completed' : '',
-                      style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          fontSize: 10,
-                          color: isCompleted ? Colors.white : Colors.black)),
-                )
-              ],
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: SizedBox(
+              width: 300,
+              height: 55,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(widget.title,
+                            style: TextStyle(
+                                fontSize: 18,
+                                color:
+                                    isCompleted ? Colors.white : Colors.black)),
+                        Icon(
+                          Icons.more_vert,
+                          color: isCompleted ? Colors.white : Colors.black,
+                          size: 24.0,
+                          semanticLabel:
+                              'Text to announce in accessibility modes',
+                        )
+                      ]),
+                  Row(children: [
+                    Container(
+                      margin: const EdgeInsets.only(right: 2),
+                      child: Icon(
+                        Icons.check,
+                        color: isCompleted ? Colors.white : Colors.black,
+                        size: 14,
+                      ),
+                    ),
+                    Text(isCompleted ? 'Completed' : '',
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: isCompleted ? Colors.white : Colors.black)),
+                  ])
+                ],
+              ),
             ),
           ),
         ),

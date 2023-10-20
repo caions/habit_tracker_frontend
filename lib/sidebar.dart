@@ -10,7 +10,7 @@ class SideBar extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Tue, Oct 17',
+          'Fri, Oct 20',
           style: TextStyle(color: Colors.white),
         ),
         HabitCard(title: 'Run'),
