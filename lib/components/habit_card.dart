@@ -52,20 +52,21 @@ class _HabitCardState extends State<HabitCard> {
                               'Text to announce in accessibility modes',
                         )
                       ]),
-                  Row(children: [
-                    Container(
-                      margin: const EdgeInsets.only(right: 2),
-                      child: Icon(
-                        Icons.check,
-                        color: isCompleted ? Colors.white : Colors.black,
-                        size: 14,
+                  Visibility(
+                    visible: isCompleted,
+                    child: Row(children: [
+                      Container(
+                        margin: const EdgeInsets.only(right: 2),
+                        child: const Icon(
+                          Icons.check,
+                          color: Colors.white,
+                          size: 14,
+                        ),
                       ),
-                    ),
-                    Text(isCompleted ? 'Completed' : '',
-                        style: TextStyle(
-                            fontSize: 12,
-                            color: isCompleted ? Colors.white : Colors.black)),
-                  ])
+                      const Text('Completed',
+                          style: TextStyle(fontSize: 12, color: Colors.white)),
+                    ]),
+                  )
                 ],
               ),
             ),
