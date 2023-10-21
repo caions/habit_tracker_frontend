@@ -26,7 +26,7 @@ class Header extends StatelessWidget {
           margin: const EdgeInsetsDirectional.only(top: 10),
           alignment: Alignment.centerRight,
           child: const Text(
-            '74% achivied',
+            '74% achieved',
             textAlign: TextAlign.right,
             style: TextStyle(color: Colors.white),
           ),

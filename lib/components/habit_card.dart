@@ -24,7 +24,7 @@ class _HabitCardState extends State<HabitCard> {
         onDoubleTap: toggleCompleted,
         child: Card(
           elevation: 0,
-          color: isCompleted ? Colors.purple : Colors.white,
+          color: isCompleted ? Colors.blue : Colors.white,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(12)),
           ),
@@ -47,7 +47,7 @@ class _HabitCardState extends State<HabitCard> {
                         Icon(
                           Icons.more_vert,
                           color: isCompleted ? Colors.white : Colors.black,
-                          size: 24.0,
+                          size: 22.0,
                           semanticLabel:
                               'Text to announce in accessibility modes',
                         )

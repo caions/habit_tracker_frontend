@@ -17,9 +17,9 @@ class _CustomCheckboxState extends State<CustomCheckbox> {
         MaterialState.selected,
       };
       if (states.any(interactiveStates.contains)) {
-        return Colors.purple;
+        return Colors.blue;
       }
-      return Colors.grey;
+      return Colors.grey.shade100;
     }
 
     return Checkbox(
