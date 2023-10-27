@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habit_tracker_frontend/form_field.dart';
 import 'components/habit_card.dart';
 
 class SideBar extends StatelessWidget {
@@ -27,6 +28,7 @@ class SideBar extends StatelessWidget {
             SizedBox(
               height: 5,
             ),
+            HabitForm(),
             HabitCard(title: 'Run'),
             HabitCard(title: 'Study'),
             HabitCard(title: 'Work'),
