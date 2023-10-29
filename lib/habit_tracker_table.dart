@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habit_tracker_frontend/registered_habits.dart';
 import 'components/custom_checkbox.dart';
 
 class HabitTrackerTable extends StatelessWidget {
@@ -6,6 +7,25 @@ class HabitTrackerTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final habitNames = RegisteredHabits();
+    final habitCells = [];
+
+    for (final habitName in habitNames()) {
+      habitCells.add(DataRow(
+        color: const MaterialStatePropertyAll(Colors.white),
+        cells: <DataCell>[
+          DataCell(Text(habitName)),
+          const DataCell(CustomCheckbox()),
+          const DataCell(CustomCheckbox()),
+          const DataCell(CustomCheckbox()),
+          const DataCell(CustomCheckbox()),
+          const DataCell(CustomCheckbox()),
+          const DataCell(CustomCheckbox()),
+          const DataCell(CustomCheckbox()),
+        ],
+      ));
+    }
+
     return DataTable(
       columns: const [
         DataColumn(
@@ -81,34 +101,7 @@ class HabitTrackerTable extends StatelessWidget {
           ),
         ),
       ],
-      rows: const <DataRow>[
-        DataRow(
-          color: MaterialStatePropertyAll(Colors.white),
-          cells: <DataCell>[
-            DataCell(Text('Run')),
-            DataCell(CustomCheckbox()),
-            DataCell(CustomCheckbox()),
-            DataCell(CustomCheckbox()),
-            DataCell(CustomCheckbox()),
-            DataCell(CustomCheckbox()),
-            DataCell(CustomCheckbox()),
-            DataCell(CustomCheckbox()),
-          ],
-        ),
-        DataRow(
-          color: MaterialStatePropertyAll(Colors.white),
-          cells: <DataCell>[
-            DataCell(Text('Study')),
-            DataCell(CustomCheckbox()),
-            DataCell(CustomCheckbox()),
-            DataCell(CustomCheckbox()),
-            DataCell(CustomCheckbox()),
-            DataCell(CustomCheckbox()),
-            DataCell(CustomCheckbox()),
-            DataCell(CustomCheckbox()),
-          ],
-        ),
-      ],
+      rows: <DataRow>[...habitCells],
     );
   }
 }
