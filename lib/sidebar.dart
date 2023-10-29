@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_tracker_frontend/form_field.dart';
+import 'package:habit_tracker_frontend/registered_habits.dart';
 import 'components/habit_card.dart';
 
 class SideBar extends StatefulWidget {
@@ -11,8 +12,17 @@ class SideBar extends StatefulWidget {
 }
 
 class _SideBarState extends State<SideBar> {
+  final habitList = [];
+  final habitNames = RegisteredHabits();
+
   @override
   Widget build(BuildContext context) {
+    for (final habitName in habitNames()) {
+      habitList.add(
+        HabitCard(title: habitName),
+      );
+    }
+
     callBackFn() {
       setState(() {
         widget.showForm = false;
@@ -45,11 +55,7 @@ class _SideBarState extends State<SideBar> {
               visible: widget.showForm,
               child: HabitForm(callBack: callBackFn),
             ),
-            const HabitCard(title: 'Run'),
-            const HabitCard(title: 'Study'),
-            const HabitCard(title: 'Work'),
-            const HabitCard(title: 'Run'),
-            const HabitCard(title: 'Study'),
+            ...habitList,
           ],
         ),
       ),
