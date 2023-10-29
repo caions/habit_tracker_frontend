@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
-  const Header({super.key});
+  final Function callBack;
+  const Header({super.key, required this.callBack});
 
   @override
   Widget build(BuildContext context) {
+    callBackFn() {
+      callBack();
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -26,7 +31,7 @@ class Header extends StatelessWidget {
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Colors.blue),
                   overlayColor: MaterialStateProperty.all(Colors.white12)),
-              onPressed: () => {},
+              onPressed: callBackFn,
               child: const Row(
                 children: [
                   Icon(Icons.add, color: Colors.white, size: 18),

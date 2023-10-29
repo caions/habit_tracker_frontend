@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class HabitForm extends StatefulWidget {
-  const HabitForm({super.key});
+  final Function callBack;
+  const HabitForm({super.key, required this.callBack});
 
   @override
   State<HabitForm> createState() => _HabitFormState();
@@ -10,8 +11,14 @@ class HabitForm extends StatefulWidget {
 class _HabitFormState extends State<HabitForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  bool showForm = true;
+
   @override
   Widget build(BuildContext context) {
+    hideHabitForm() {
+      widget.callBack();
+    }
+
     return Form(
       key: _formKey,
       child: Column(
@@ -32,13 +39,13 @@ class _HabitFormState extends State<HabitForm> {
               hintStyle: TextStyle(
                 color: Colors.white,
               ),
-              hintText: 'Digite o nome do hábito',
+              hintText: 'Type the habit name',
               contentPadding: EdgeInsets.symmetric(
                   vertical: 10.0, horizontal: 10), // Altura menor
             ),
             validator: (String? value) {
               if (value == null || value.isEmpty) {
-                return 'Por favor, insira algum texto';
+                return 'Please, insert the habit name';
               }
               return null;
             },
@@ -67,7 +74,7 @@ class _HabitFormState extends State<HabitForm> {
                   ),
                 ),
               ),
-              SizedBox(width: 5),
+              const SizedBox(width: 5),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: ElevatedButton(
@@ -77,7 +84,7 @@ class _HabitFormState extends State<HabitForm> {
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.yellowAccent),
                       overlayColor: MaterialStateProperty.all(Colors.white12)),
-                  onPressed: () {},
+                  onPressed: hideHabitForm,
                   child: const Text('Cancel'),
                 ),
               ),

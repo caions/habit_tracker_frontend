@@ -3,34 +3,49 @@ import 'header.dart';
 import 'sidebar.dart';
 import 'habit_tracker_table.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool showHabitForm = false;
+
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    showHabitFormCb() {
+      setState(() {
+        showHabitForm = true;
+      });
+    }
+
+    return Scaffold(
       backgroundColor: Colors.black87,
       body: Padding(
-        padding: EdgeInsets.all(100),
+        padding: const EdgeInsets.all(100),
         child: Row(
           children: [
             Expanded(
               flex: 3,
               child: Padding(
-                padding: EdgeInsets.only(right: 50),
+                padding: const EdgeInsets.only(right: 50),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Header(),
-                    SizedBox(height: 30),
-                    HabitTrackerTable()
+                    Header(callBack: showHabitFormCb),
+                    const SizedBox(height: 30),
+                    const HabitTrackerTable()
                   ],
                 ),
               ),
             ),
             Expanded(
               flex: 1,
-              child: SideBar(),
+              child: SideBar(
+                showForm: showHabitForm,
+              ),
             ),
           ],
         ),
