@@ -3,20 +3,23 @@ import 'package:habit_tracker_frontend/form_field.dart';
 import 'package:habit_tracker_frontend/registered_habits.dart';
 import 'components/habit_card.dart';
 
+ScrollController _scrollController = ScrollController();
+
+// ignore: must_be_immutable
 class SideBar extends StatefulWidget {
   late bool showForm;
   SideBar({super.key, required this.showForm});
 
   @override
+  // ignore: library_private_types_in_public_api
   _SideBarState createState() => _SideBarState();
 }
 
 class _SideBarState extends State<SideBar> {
-  final habitList = [];
-  final habitNames = RegisteredHabits();
-
   @override
   Widget build(BuildContext context) {
+    final habitList = [];
+    final habitNames = RegisteredHabits();
     for (final habitName in habitNames()) {
       habitList.add(
         HabitCard(title: habitName),
@@ -40,8 +43,10 @@ class _SideBarState extends State<SideBar> {
       ),
       padding: const EdgeInsets.all(10),
       child: Scrollbar(
+        controller: _scrollController,
         thumbVisibility: true,
         child: ListView(
+          controller: _scrollController,
           padding: const EdgeInsets.only(right: 15),
           children: [
             const Text(
