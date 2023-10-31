@@ -1,9 +1,14 @@
-class RegisteredHabits {
-  final List<String> habitNames = ['run', 'study', 'play'];
+import 'package:flutter/material.dart';
 
-  RegisteredHabits();
+class RegisteredHabits extends ChangeNotifier {
+  List<String> habitNames = ['run', 'study', 'play'];
 
-  call() {
-    return habitNames;
+  List<String> getHabitNames() {
+    return habitNames.toList();
+  }
+
+  void addHabit(String newHabit) {
+    habitNames.add(newHabit);
+    notifyListeners();
   }
 }

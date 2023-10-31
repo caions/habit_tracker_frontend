@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_tracker_frontend/registered_habits.dart';
+import 'package:provider/provider.dart';
 import 'components/custom_checkbox.dart';
 
 class HabitTrackerTable extends StatelessWidget {
@@ -7,10 +8,10 @@ class HabitTrackerTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final habitNames = RegisteredHabits();
+    var habitNames = Provider.of<RegisteredHabits>(context);
     final habitCells = [];
 
-    for (final habitName in habitNames()) {
+    for (final habitName in habitNames.getHabitNames()) {
       habitCells.add(DataRow(
         color: const MaterialStatePropertyAll(Colors.white),
         cells: <DataCell>[

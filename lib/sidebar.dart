@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_tracker_frontend/form_field.dart';
 import 'package:habit_tracker_frontend/registered_habits.dart';
+import 'package:provider/provider.dart';
 import 'components/habit_card.dart';
 
 ScrollController _scrollController = ScrollController();
@@ -19,8 +20,8 @@ class _SideBarState extends State<SideBar> {
   @override
   Widget build(BuildContext context) {
     final habitList = [];
-    final habitNames = RegisteredHabits();
-    for (final habitName in habitNames()) {
+    var habitNames = Provider.of<RegisteredHabits>(context);
+    for (final habitName in habitNames.getHabitNames()) {
       habitList.add(
         HabitCard(title: habitName),
       );

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:habit_tracker_frontend/registered_habits.dart';
+import 'package:provider/provider.dart';
 
 class HabitForm extends StatefulWidget {
   final Function callBack;
@@ -12,9 +14,17 @@ class _HabitFormState extends State<HabitForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool showForm = true;
+  final TextEditingController _habitController = TextEditingController();
+
+  @override
+  void dispose() {
+    _habitController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    var habitNames = Provider.of<RegisteredHabits>(context);
     hideHabitForm() {
       widget.callBack();
     }
@@ -25,6 +35,7 @@ class _HabitFormState extends State<HabitForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TextFormField(
+            controller: _habitController,
             style: const TextStyle(color: Colors.white),
             decoration: const InputDecoration(
               enabledBorder: OutlineInputBorder(
@@ -63,9 +74,8 @@ class _HabitFormState extends State<HabitForm> {
                       overlayColor: MaterialStateProperty.all(Colors.white12)),
                   onPressed: () => {
                     if (_formKey.currentState!.validate())
-                      {
-                        // Process data.
-                      }
+                      habitNames.addHabit(_habitController.text),
+                    _habitController.clear()
                   },
                   child: const Row(
                     children: [
