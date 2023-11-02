@@ -32,7 +32,7 @@ class _HabitCardState extends State<HabitCard> {
             padding: const EdgeInsets.all(10),
             child: SizedBox(
               width: 300,
-              height: 55,
+              height: 60,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -44,13 +44,12 @@ class _HabitCardState extends State<HabitCard> {
                                 fontSize: 18,
                                 color:
                                     isCompleted ? Colors.white : Colors.black)),
-                        Icon(
-                          Icons.more_vert,
+                        IconButton(
+                          iconSize: 22,
+                          onPressed: () => print('pressionado'),
+                          icon: const Icon(Icons.more_vert),
                           color: isCompleted ? Colors.white : Colors.black,
-                          size: 22.0,
-                          semanticLabel:
-                              'Text to announce in accessibility modes',
-                        )
+                        ),
                       ]),
                   Visibility(
                     visible: isCompleted,
