@@ -12,7 +12,8 @@ class RegisteredHabits extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeHabit(String position) {
-    habitNames.remove(position);
+  void removeHabit(String habitName) {
+    habitNames.remove(habitName);
+    notifyListeners();
   }
 }

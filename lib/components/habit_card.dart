@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:habit_tracker_frontend/registered_habits.dart';
+import 'package:provider/provider.dart';
 
 class HabitCard extends StatefulWidget {
   final String title;
@@ -13,6 +15,8 @@ class _HabitCardState extends State<HabitCard> {
 
   @override
   Widget build(BuildContext context) {
+    var habitNames = Provider.of<RegisteredHabits>(context);
+
     void toggleCompleted() {
       setState(() {
         isCompleted = !isCompleted;
@@ -46,7 +50,7 @@ class _HabitCardState extends State<HabitCard> {
                                     isCompleted ? Colors.white : Colors.black)),
                         IconButton(
                           iconSize: 22,
-                          onPressed: () => print('pressionado'),
+                          onPressed: () => habitNames.removeHabit(widget.title),
                           icon: const Icon(Icons.more_vert),
                           color: isCompleted ? Colors.white : Colors.black,
                         ),
