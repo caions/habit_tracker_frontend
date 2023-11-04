@@ -10,8 +10,11 @@ class HabitCard extends StatefulWidget {
   State<HabitCard> createState() => _HabitCardState();
 }
 
+enum SampleItem { itemOne, itemTwo }
+
 class _HabitCardState extends State<HabitCard> {
   bool isCompleted = false;
+  SampleItem? selectedMenu;
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +51,28 @@ class _HabitCardState extends State<HabitCard> {
                                 fontSize: 18,
                                 color:
                                     isCompleted ? Colors.white : Colors.black)),
-                        IconButton(
-                          iconSize: 22,
-                          onPressed: () => habitNames.removeHabit(widget.title),
-                          icon: const Icon(Icons.more_vert),
-                          color: isCompleted ? Colors.white : Colors.black,
+                        PopupMenuButton<SampleItem>(
+                          initialValue: selectedMenu,
+                          // Callback that sets the selected popup menu item.
+                          onSelected: (SampleItem item) {
+                            setState(() {
+                              selectedMenu = item;
+                            });
+                          },
+                          itemBuilder: (BuildContext context) =>
+                              <PopupMenuEntry<SampleItem>>[
+                            const PopupMenuItem<SampleItem>(
+                              value: SampleItem.itemOne,
+                              child: Text('Edit the Habit'),
+                            ),
+                            PopupMenuItem<SampleItem>(
+                              value: SampleItem.itemTwo,
+                              child: const Text('Delete the Habit'),
+                              onTap: () {
+                                habitNames.removeHabit(widget.title);
+                              },
+                            ),
+                          ],
                         ),
                       ]),
                   Visibility(
