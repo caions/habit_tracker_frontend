@@ -8,10 +8,10 @@ class HabitTrackerTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var habitNames = Provider.of<RegisteredHabits>(context);
+    var habits = Provider.of<RegisteredHabits>(context);
     final habitCells = [];
 
-    for (final habitName in habitNames.getHabitNames()) {
+    for (final habitName in habits.habitNames) {
       habitCells.add(DataRow(
         color: const MaterialStatePropertyAll(Colors.white),
         cells: <DataCell>[

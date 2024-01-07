@@ -17,11 +17,25 @@ class SideBar extends StatefulWidget {
 }
 
 class _SideBarState extends State<SideBar> {
+  List<String> habits = [];
+
+  @override
+  initState() {
+    super.initState();
+    _loadHabits();
+  }
+
+  _loadHabits() async {
+    var registeredHabits =
+        Provider.of<RegisteredHabits>(context, listen: false);
+    habits = await registeredHabits.getHabitNames();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     final habitList = [];
-    var habitNames = Provider.of<RegisteredHabits>(context);
-    for (final habitName in habitNames.getHabitNames()) {
+    for (final habitName in habits) {
       habitList.add(
         HabitCard(title: habitName),
       );
