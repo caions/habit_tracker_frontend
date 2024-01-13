@@ -2,17 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:habit_tracker_frontend/api/api_service.dart';
 
 class RegisteredHabits extends ChangeNotifier {
-  List<String> habitNames = [];
+  List<HabitModel> habitsList = [];
+  List<String> completedHabitsId = [];
 
-  Future<List<String>> getHabitNames() async {
-    var apiService = ApiService();
+  var apiService = ApiService();
+
+  Future<List<HabitModel>> getHabitNames() async {
     try {
-      var habits = await apiService.fetchData();
-      for (var habit in habits) {
-        habitNames.add(habit['name']);
+      var habits = await apiService.getAllHabits();
+      var completedHabits = await apiService.getCompletedHabits();
+
+      for (var completedHabit in completedHabits) {
+        completedHabitsId.add(completedHabit.habitId);
       }
+
+      for (var habit in habits) {
+        habit.completed = completedHabitsId.contains(habit.id);
+        habitsList.add(habit);
+      }
+
       notifyListeners();
-      return habitNames;
+      return habitsList;
     } catch (e) {
       print('Erro ao obter hábitos: $e');
       throw Exception('Erro ao obter hábitos: $e');
@@ -20,12 +30,12 @@ class RegisteredHabits extends ChangeNotifier {
   }
 
   void addHabit(String newHabit) {
-    habitNames.add(newHabit);
+    //habitsList.add(newHabit);
     notifyListeners();
   }
 
   void removeHabit(String habitName) {
-    habitNames.remove(habitName);
+    habitsList.remove(habitName);
     notifyListeners();
   }
 }

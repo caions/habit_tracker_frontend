@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habit_tracker_frontend/api/api_service.dart';
 import 'package:habit_tracker_frontend/form_field.dart';
 import 'package:habit_tracker_frontend/registered_habits.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,7 @@ class SideBar extends StatefulWidget {
 }
 
 class _SideBarState extends State<SideBar> {
-  List<String> habits = [];
+  List<HabitModel> habitsList = [];
 
   @override
   initState() {
@@ -28,16 +29,16 @@ class _SideBarState extends State<SideBar> {
   _loadHabits() async {
     var registeredHabits =
         Provider.of<RegisteredHabits>(context, listen: false);
-    habits = await registeredHabits.getHabitNames();
+    habitsList = await registeredHabits.getHabitNames();
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    final habitList = [];
-    for (final habitName in habits) {
-      habitList.add(
-        HabitCard(title: habitName),
+    final habitCardList = [];
+    for (final habit in habitsList) {
+      habitCardList.add(
+        HabitCard(title: habit.name, completed: habit.completed),
       );
     }
 
@@ -75,7 +76,7 @@ class _SideBarState extends State<SideBar> {
               visible: widget.showForm,
               child: HabitForm(callBack: callBackFn),
             ),
-            ...habitList,
+            ...habitCardList,
           ],
         ),
       ),

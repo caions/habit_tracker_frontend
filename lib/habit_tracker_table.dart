@@ -11,11 +11,11 @@ class HabitTrackerTable extends StatelessWidget {
     var habits = Provider.of<RegisteredHabits>(context);
     final habitCells = [];
 
-    for (final habitName in habits.habitNames) {
+    for (final habit in habits.habitsList) {
       habitCells.add(DataRow(
         color: const MaterialStatePropertyAll(Colors.white),
         cells: <DataCell>[
-          DataCell(Text(habitName)),
+          DataCell(Text(habit.name)),
           const DataCell(CustomCheckbox()),
           const DataCell(CustomCheckbox()),
           const DataCell(CustomCheckbox()),

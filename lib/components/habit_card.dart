@@ -4,7 +4,8 @@ import 'package:provider/provider.dart';
 
 class HabitCard extends StatefulWidget {
   final String title;
-  const HabitCard({super.key, required this.title});
+  final bool? completed;
+  const HabitCard({super.key, required this.title, required this.completed});
 
   @override
   State<HabitCard> createState() => _HabitCardState();
@@ -13,13 +14,12 @@ class HabitCard extends StatefulWidget {
 enum SampleItem { itemOne, itemTwo }
 
 class _HabitCardState extends State<HabitCard> {
-  bool isCompleted = false;
   SampleItem? selectedMenu;
 
   @override
   Widget build(BuildContext context) {
     var habitNames = Provider.of<RegisteredHabits>(context);
-
+    bool isCompleted = widget.completed!;
     void toggleCompleted() {
       setState(() {
         isCompleted = !isCompleted;
