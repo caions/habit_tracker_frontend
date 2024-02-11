@@ -20,13 +20,6 @@ class _SideBarState extends State<SideBar> {
   @override
   initState() {
     super.initState();
-    _loadHabits();
-  }
-
-  _loadHabits() async {
-    var registeredHabits =
-        Provider.of<RegisteredHabits>(context, listen: false);
-    await registeredHabits.getHabitNames();
   }
 
   @override

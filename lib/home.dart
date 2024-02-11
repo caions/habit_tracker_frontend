@@ -16,6 +16,18 @@ class _HomePageState extends State<HomePage> {
   bool showHabitForm = false;
 
   @override
+  void initState() {
+    super.initState();
+    _loadHabits();
+  }
+
+  _loadHabits() async {
+    var registeredHabits =
+        Provider.of<RegisteredHabits>(context, listen: false);
+    await registeredHabits.getHabitNames();
+  }
+
+  @override
   Widget build(BuildContext context) {
     showHabitFormCb() {
       setState(() {
@@ -23,37 +35,35 @@ class _HomePageState extends State<HomePage> {
       });
     }
 
-    return ChangeNotifierProvider(
-        create: (context) => RegisteredHabits(),
-        child: Scaffold(
-          backgroundColor: Colors.black87,
-          body: Padding(
-            padding: const EdgeInsets.all(100),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 3,
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 50),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Header(callBack: showHabitFormCb),
-                        const SizedBox(height: 30),
-                        const HabitTrackerTable()
-                      ],
-                    ),
-                  ),
+    return Scaffold(
+      backgroundColor: Colors.black87,
+      body: Padding(
+        padding: const EdgeInsets.all(100),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 3,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 50),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Header(callBack: showHabitFormCb),
+                    const SizedBox(height: 30),
+                    const HabitTrackerTable()
+                  ],
                 ),
-                Expanded(
-                  flex: 1,
-                  child: SideBar(
-                    showForm: showHabitForm,
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        ));
+            Expanded(
+              flex: 1,
+              child: SideBar(
+                showForm: showHabitForm,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
