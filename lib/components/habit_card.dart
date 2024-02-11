@@ -19,7 +19,7 @@ class _HabitCardState extends State<HabitCard> {
   @override
   Widget build(BuildContext context) {
     var habitNames = Provider.of<RegisteredHabits>(context);
-    bool isCompleted = widget.completed!;
+    bool isCompleted = widget.completed == null ? false : widget.completed!;
     void toggleCompleted() {
       setState(() {
         isCompleted = !isCompleted;

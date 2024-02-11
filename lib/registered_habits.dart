@@ -29,9 +29,15 @@ class RegisteredHabits extends ChangeNotifier {
     }
   }
 
-  void addHabit(String newHabit) {
-    //habitsList.add(newHabit);
-    notifyListeners();
+  void addHabit(String newHabit) async {
+    try {
+      final habit = await apiService.createHabit(newHabit);
+      habitsList.add(habit);
+      notifyListeners();
+    } catch (e) {
+      print('Erro ao criar o hábito: $e');
+      throw Exception('Erro ao criar o hábito: $e');
+    }
   }
 
   void removeHabit(String habitName) {

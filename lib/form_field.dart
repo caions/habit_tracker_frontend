@@ -73,9 +73,9 @@ class _HabitFormState extends State<HabitForm> {
                           MaterialStateProperty.all<Color>(Colors.blue),
                       overlayColor: MaterialStateProperty.all(Colors.white12)),
                   onPressed: () => {
-                    if (_formKey.currentState!.validate())
-                      habitNames.addHabit(_habitController.text),
-                    _habitController.clear()
+                    habitNames.addHabit(_habitController.text),
+                    _habitController.clear(),
+                    hideHabitForm(),
                   },
                   child: const Row(
                     children: [

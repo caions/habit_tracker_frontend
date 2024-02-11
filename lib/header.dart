@@ -20,9 +20,9 @@ class Header extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              'Fri, Oct 20 - 09',
-              style: TextStyle(color: Colors.white, fontSize: 20),
+            Text(
+              DateTime.now().toString(),
+              style: const TextStyle(color: Colors.white, fontSize: 20),
             ),
             OutlinedButton(
               style: ButtonStyle(

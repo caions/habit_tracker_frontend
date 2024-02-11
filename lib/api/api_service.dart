@@ -4,24 +4,15 @@ import 'dart:convert';
 class HabitModel {
   String id;
   String name;
-  DateTime createdAt;
-  DateTime updatedAt;
   bool? completed;
 
   HabitModel({
     required this.id,
     required this.name,
-    required this.createdAt,
-    required this.updatedAt,
   });
 
   factory HabitModel.fromJson(Map<String, dynamic> json) {
-    return HabitModel(
-      id: json['id'],
-      name: json['name'],
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
-    );
+    return HabitModel(id: json['id'], name: json['name']);
   }
 }
 
@@ -46,17 +37,36 @@ class CompletedHabitModel {
 }
 
 class ApiService {
+  final Uri habitsUrl = Uri.parse('http://localhost:8000/habits');
+
   Future<List<HabitModel>> getAllHabits() async {
-    final Uri url = Uri.parse('http://localhost:8000/habits');
-    final response = await http.get(url);
+    final response = await http.get(habitsUrl);
     if (response.statusCode == 200) {
       List<dynamic> data = jsonDecode(response.body);
       List<HabitModel> habits =
           data.map((json) => HabitModel.fromJson(json)).toList();
       return habits;
     } else {
-      print('Erro na requisição: ${response.statusCode}');
-      throw Exception('Erro na requisição: ${response.statusCode}');
+      print('Erro na requisição: ${response.body}');
+      throw Exception('Erro na requisição: ${response.body}');
+    }
+  }
+
+  Future<HabitModel> createHabit(String habitName) async {
+    final body = jsonEncode({'name': habitName});
+    final response = await http.post(
+      habitsUrl,
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: body,
+    );
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+      return HabitModel.fromJson(json);
+    } else {
+      print('Erro na requisição: ${response.body}');
+      throw Exception('Erro na requisição: ${response.body}');
     }
   }
 
@@ -69,8 +79,8 @@ class ApiService {
           data.map((json) => CompletedHabitModel.fromJson(json)).toList();
       return completedHabits;
     } else {
-      print('Erro na requisição: ${response.statusCode}');
-      throw Exception('Erro na requisição: ${response.statusCode}');
+      print('Erro na requisição: ${response.body}');
+      throw Exception('Erro na requisição: ${response.body}');
     }
   }
 }
