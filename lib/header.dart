@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:habit_tracker_frontend/registered_habits.dart';
+import 'package:provider/provider.dart';
 
 class Header extends StatelessWidget {
   final Function callBack;
@@ -10,6 +12,15 @@ class Header extends StatelessWidget {
       callBack();
     }
 
+    var habitsList = Provider.of<RegisteredHabits>(context);
+    double percentualCompleted = 0.0;
+    int totalCompleted =
+        habitsList.habitsList.where((habit) => habit.completed == true).length;
+    var decimalCompleted = 0.0;
+    if (habitsList.habitsList.isNotEmpty) {
+      decimalCompleted = totalCompleted / habitsList.habitsList.length;
+    }
+    percentualCompleted = (decimalCompleted * 100).roundToDouble();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -43,18 +54,18 @@ class Header extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 30),
-        const LinearProgressIndicator(
-          value: 0.74,
+        LinearProgressIndicator(
+          value: decimalCompleted,
           backgroundColor: Colors.blue,
-          valueColor: AlwaysStoppedAnimation(Colors.red),
+          valueColor: const AlwaysStoppedAnimation(Colors.red),
         ),
         Container(
           margin: const EdgeInsetsDirectional.only(top: 10),
           alignment: Alignment.centerRight,
-          child: const Text(
-            '74% achieved',
+          child: Text(
+            '$percentualCompleted% achieved',
             textAlign: TextAlign.right,
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
         ),
       ],
