@@ -20,8 +20,10 @@ class _HabitTrackerTableState extends State<HabitTrackerTable> {
         cells: [
           DataCell(Text(habit.name)),
           DataCell(
+            // SUN
             CustomCheckbox(
-              checked: habit.completed ?? false,
+              checked:
+                  (habit.completed ?? false) && DateTime.now().weekday == 7,
               onChanged: (value) {
                 setState(() {
                   habit.completed = value;
@@ -30,8 +32,10 @@ class _HabitTrackerTableState extends State<HabitTrackerTable> {
             ),
           ),
           DataCell(
+            // MON
             CustomCheckbox(
-              checked: habit.completed ?? false,
+              checked:
+                  (habit.completed ?? false) && DateTime.now().weekday == 1,
               onChanged: (value) {
                 setState(() {
                   habit.completed = value;
@@ -40,8 +44,10 @@ class _HabitTrackerTableState extends State<HabitTrackerTable> {
             ),
           ),
           DataCell(
+            // TUE
             CustomCheckbox(
-              checked: habit.completed ?? false,
+              checked:
+                  (habit.completed ?? false) && DateTime.now().weekday == 2,
               onChanged: (value) {
                 setState(() {
                   habit.completed = value;
@@ -50,8 +56,10 @@ class _HabitTrackerTableState extends State<HabitTrackerTable> {
             ),
           ),
           DataCell(
+            // WED
             CustomCheckbox(
-              checked: habit.completed ?? false,
+              checked:
+                  (habit.completed ?? false) && DateTime.now().weekday == 3,
               onChanged: (value) {
                 setState(() {
                   habit.completed = value;
@@ -60,8 +68,10 @@ class _HabitTrackerTableState extends State<HabitTrackerTable> {
             ),
           ),
           DataCell(
+            // THU
             CustomCheckbox(
-              checked: habit.completed ?? false,
+              checked:
+                  (habit.completed ?? false) && DateTime.now().weekday == 4,
               onChanged: (value) {
                 setState(() {
                   habit.completed = value;
@@ -70,8 +80,10 @@ class _HabitTrackerTableState extends State<HabitTrackerTable> {
             ),
           ),
           DataCell(
+            // FRI
             CustomCheckbox(
-              checked: habit.completed ?? false,
+              checked:
+                  (habit.completed ?? false) && DateTime.now().weekday == 5,
               onChanged: (value) {
                 setState(() {
                   habit.completed = value;
@@ -80,8 +92,10 @@ class _HabitTrackerTableState extends State<HabitTrackerTable> {
             ),
           ),
           DataCell(
+            // SAT
             CustomCheckbox(
-              checked: habit.completed ?? false,
+              checked:
+                  (habit.completed ?? false) && DateTime.now().weekday == 6,
               onChanged: (value) {
                 setState(() {
                   habit.completed = value;
