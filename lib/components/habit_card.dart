@@ -83,7 +83,7 @@ class _HabitCardState extends State<HabitCard> {
                               value: SampleItem.itemTwo,
                               child: const Text('Delete the Habit'),
                               onTap: () {
-                                habitNames.removeHabit(widget.title);
+                                habitNames.removeHabit(widget.id);
                               },
                             ),
                           ],

@@ -53,8 +53,13 @@ class RegisteredHabits extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeHabit(String habitName) {
-    memoryHabits.remove(habitName);
+  void removeHabit(String habitId) async {
+    try {
+      await apiService.deleteHabit(habitId);
+      memoryHabits.removeWhere((habit) => habit.id == habitId);
+    } catch (e) {
+      throw Exception('Erro ao remover o habito: $e');
+    }
     notifyListeners();
   }
 }
