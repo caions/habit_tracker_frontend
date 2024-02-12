@@ -25,9 +25,9 @@ class _HabitTrackerTableState extends State<HabitTrackerTable> {
               checked:
                   (habit.completed ?? false) && DateTime.now().weekday == 7,
               onChanged: (value) {
-                setState(() {
+                /* setState(() {
                   habit.completed = value;
-                });
+                }); */
               },
             ),
           ),
@@ -37,9 +37,9 @@ class _HabitTrackerTableState extends State<HabitTrackerTable> {
               checked:
                   (habit.completed ?? false) && DateTime.now().weekday == 1,
               onChanged: (value) {
-                setState(() {
+                /* setState(() {
                   habit.completed = value;
-                });
+                }); */
               },
             ),
           ),
@@ -49,9 +49,9 @@ class _HabitTrackerTableState extends State<HabitTrackerTable> {
               checked:
                   (habit.completed ?? false) && DateTime.now().weekday == 2,
               onChanged: (value) {
-                setState(() {
+                /* setState(() {
                   habit.completed = value;
-                });
+                }); */
               },
             ),
           ),
@@ -61,9 +61,9 @@ class _HabitTrackerTableState extends State<HabitTrackerTable> {
               checked:
                   (habit.completed ?? false) && DateTime.now().weekday == 3,
               onChanged: (value) {
-                setState(() {
+                /* setState(() {
                   habit.completed = value;
-                });
+                }); */
               },
             ),
           ),
@@ -73,9 +73,9 @@ class _HabitTrackerTableState extends State<HabitTrackerTable> {
               checked:
                   (habit.completed ?? false) && DateTime.now().weekday == 4,
               onChanged: (value) {
-                setState(() {
+                /* setState(() {
                   habit.completed = value;
-                });
+                }); */
               },
             ),
           ),
@@ -85,9 +85,9 @@ class _HabitTrackerTableState extends State<HabitTrackerTable> {
               checked:
                   (habit.completed ?? false) && DateTime.now().weekday == 5,
               onChanged: (value) {
-                setState(() {
+                /* setState(() {
                   habit.completed = value;
-                });
+                }); */
               },
             ),
           ),
@@ -97,9 +97,9 @@ class _HabitTrackerTableState extends State<HabitTrackerTable> {
               checked:
                   (habit.completed ?? false) && DateTime.now().weekday == 6,
               onChanged: (value) {
-                setState(() {
+                /* setState(() {
                   habit.completed = value;
-                });
+                }); */
               },
             ),
           ),
