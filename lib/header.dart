@@ -47,7 +47,7 @@ class _HeaderState extends State<Header> {
       children: [
         Text(
           greetingMessage(),
-          style: const TextStyle(color: Colors.white, fontSize: 50),
+          style: const TextStyle(color: Colors.white, fontSize: 40),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

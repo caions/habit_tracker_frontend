@@ -38,35 +38,63 @@ class _HomePageState extends State<HomePage> {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.black87,
-      body: Padding(
-        padding: const EdgeInsets.all(60),
-        child: Row(
-          children: [
-            Visibility(
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(60),
+            child: Visibility(
               visible: screenSize.width > 850,
-              child: Expanded(
-                flex: 3,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 40),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Header(callBack: showHabitFormCb),
-                      const SizedBox(height: 10),
-                      const HabitTrackerTable()
-                    ],
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 40),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Header(callBack: showHabitFormCb),
+                          const SizedBox(height: 10),
+                          const HabitTrackerTable()
+                        ],
+                      ),
+                    ),
                   ),
+                  Expanded(
+                    flex: 1,
+                    child: SideBar(
+                      showForm: showHabitForm,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Visibility(
+            visible: screenSize.width < 850,
+            child: Center(
+              child: SizedBox(
+                width: 300,
+                height: 500,
+                child: ListView(
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                            width: 300,
+                            margin: const EdgeInsets.only(bottom: 10),
+                            child: Header(callBack: showHabitFormCb)),
+                        SideBar(
+                          showForm: showHabitForm,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: SideBar(
-                showForm: showHabitForm,
-              ),
-            ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

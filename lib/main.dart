@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Habit Tracker',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
         useMaterial3: true,
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
       home: ChangeNotifierProvider(
         create: (context) => RegisteredHabits(),
         child: const MaterialApp(
+          debugShowCheckedModeBanner: false,
           home: HomePage(),
         ),
       ),

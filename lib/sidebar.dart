@@ -37,6 +37,8 @@ class _SideBarState extends State<SideBar> {
     }
 
     return Container(
+      width: 500,
+      height: 449,
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.blue,
@@ -48,10 +50,6 @@ class _SideBarState extends State<SideBar> {
       child: ListView(
         padding: const EdgeInsets.only(right: 15),
         children: [
-          const Text(
-            'Fri, Oct 20',
-            style: TextStyle(color: Colors.white),
-          ),
           const SizedBox(
             height: 5,
           ),
