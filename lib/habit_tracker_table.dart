@@ -27,82 +27,94 @@ class HabitTrackerTable extends StatelessWidget {
       ));
     }
 
-    return DataTable(
-      columns: const [
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'Habit Name',
-              style:
-                  TextStyle(color: Colors.white, fontStyle: FontStyle.italic),
-            ),
-          ),
+    return Container(
+      height: 400,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.blue,
+          width: 2.0,
         ),
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'Sun',
-              style:
-                  TextStyle(color: Colors.white, fontStyle: FontStyle.italic),
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
+      ),
+      child: ListView(children: [
+        DataTable(
+          columns: const [
+            DataColumn(
+              label: Expanded(
+                child: Text(
+                  'Habit Name',
+                  style: TextStyle(
+                      color: Colors.white, fontStyle: FontStyle.italic),
+                ),
+              ),
             ),
-          ),
-        ),
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'Mon',
-              style:
-                  TextStyle(color: Colors.white, fontStyle: FontStyle.italic),
+            DataColumn(
+              label: Expanded(
+                child: Text(
+                  'Sun',
+                  style: TextStyle(
+                      color: Colors.white, fontStyle: FontStyle.italic),
+                ),
+              ),
             ),
-          ),
-        ),
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'Tue',
-              style:
-                  TextStyle(color: Colors.white, fontStyle: FontStyle.italic),
+            DataColumn(
+              label: Expanded(
+                child: Text(
+                  'Mon',
+                  style: TextStyle(
+                      color: Colors.white, fontStyle: FontStyle.italic),
+                ),
+              ),
             ),
-          ),
-        ),
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'Wed',
-              style:
-                  TextStyle(color: Colors.white, fontStyle: FontStyle.italic),
+            DataColumn(
+              label: Expanded(
+                child: Text(
+                  'Tue',
+                  style: TextStyle(
+                      color: Colors.white, fontStyle: FontStyle.italic),
+                ),
+              ),
             ),
-          ),
-        ),
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'Thu',
-              style:
-                  TextStyle(color: Colors.white, fontStyle: FontStyle.italic),
+            DataColumn(
+              label: Expanded(
+                child: Text(
+                  'Wed',
+                  style: TextStyle(
+                      color: Colors.white, fontStyle: FontStyle.italic),
+                ),
+              ),
             ),
-          ),
-        ),
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'Fri',
-              style:
-                  TextStyle(color: Colors.white, fontStyle: FontStyle.italic),
+            DataColumn(
+              label: Expanded(
+                child: Text(
+                  'Thu',
+                  style: TextStyle(
+                      color: Colors.white, fontStyle: FontStyle.italic),
+                ),
+              ),
             ),
-          ),
-        ),
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'Sat',
-              style:
-                  TextStyle(color: Colors.white, fontStyle: FontStyle.italic),
+            DataColumn(
+              label: Expanded(
+                child: Text(
+                  'Fri',
+                  style: TextStyle(
+                      color: Colors.white, fontStyle: FontStyle.italic),
+                ),
+              ),
             ),
-          ),
-        ),
-      ],
-      rows: <DataRow>[...habitCells],
+            DataColumn(
+              label: Expanded(
+                child: Text(
+                  'Sat',
+                  style: TextStyle(
+                      color: Colors.white, fontStyle: FontStyle.italic),
+                ),
+              ),
+            ),
+          ],
+          rows: <DataRow>[...habitCells],
+        )
+      ]),
     );
   }
 }

@@ -4,8 +4,6 @@ import 'package:habit_tracker_frontend/registered_habits.dart';
 import 'package:provider/provider.dart';
 import 'components/habit_card.dart';
 
-ScrollController _scrollController = ScrollController();
-
 // ignore: must_be_immutable
 class SideBar extends StatefulWidget {
   late bool showForm;
@@ -40,7 +38,6 @@ class _SideBarState extends State<SideBar> {
     }
 
     return Container(
-      height: 468,
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.blue,
@@ -49,27 +46,22 @@ class _SideBarState extends State<SideBar> {
         borderRadius: const BorderRadius.all(Radius.circular(5)),
       ),
       padding: const EdgeInsets.all(10),
-      child: Scrollbar(
-        controller: _scrollController,
-        thumbVisibility: true,
-        child: ListView(
-          controller: _scrollController,
-          padding: const EdgeInsets.only(right: 15),
-          children: [
-            const Text(
-              'Fri, Oct 20',
-              style: TextStyle(color: Colors.white),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Visibility(
-              visible: widget.showForm,
-              child: HabitForm(callBack: callBackFn),
-            ),
-            ...habitCardList,
-          ],
-        ),
+      child: ListView(
+        padding: const EdgeInsets.only(right: 15),
+        children: [
+          const Text(
+            'Fri, Oct 20',
+            style: TextStyle(color: Colors.white),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Visibility(
+            visible: widget.showForm,
+            child: HabitForm(callBack: callBackFn),
+          ),
+          ...habitCardList,
+        ],
       ),
     );
   }

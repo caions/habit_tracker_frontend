@@ -38,18 +38,18 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.black87,
       body: Padding(
-        padding: const EdgeInsets.all(100),
+        padding: const EdgeInsets.all(60),
         child: Row(
           children: [
             Expanded(
               flex: 3,
               child: Padding(
-                padding: const EdgeInsets.only(right: 50),
+                padding: const EdgeInsets.only(right: 40),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Header(callBack: showHabitFormCb),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 10),
                     const HabitTrackerTable()
                   ],
                 ),
