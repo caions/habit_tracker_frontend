@@ -109,6 +109,7 @@ class _HabitTrackerTableState extends State<HabitTrackerTable> {
 
     return Container(
       height: 400,
+      width: 1000,
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.blue,

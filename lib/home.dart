@@ -35,23 +35,27 @@ class _HomePageState extends State<HomePage> {
       });
     }
 
+    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.black87,
       body: Padding(
         padding: const EdgeInsets.all(60),
         child: Row(
           children: [
-            Expanded(
-              flex: 3,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 40),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Header(callBack: showHabitFormCb),
-                    const SizedBox(height: 10),
-                    const HabitTrackerTable()
-                  ],
+            Visibility(
+              visible: screenSize.width > 850,
+              child: Expanded(
+                flex: 3,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 40),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Header(callBack: showHabitFormCb),
+                      const SizedBox(height: 10),
+                      const HabitTrackerTable()
+                    ],
+                  ),
                 ),
               ),
             ),
