@@ -3,9 +3,15 @@ import 'package:habit_tracker_frontend/registered_habits.dart';
 import 'package:provider/provider.dart';
 
 class HabitCard extends StatefulWidget {
+  final String id;
   final String title;
   final bool? completed;
-  const HabitCard({super.key, required this.title, required this.completed});
+  const HabitCard({
+    super.key,
+    required this.id,
+    required this.title,
+    required this.completed,
+  });
 
   @override
   State<HabitCard> createState() => _HabitCardState();
@@ -21,9 +27,7 @@ class _HabitCardState extends State<HabitCard> {
     var habitNames = Provider.of<RegisteredHabits>(context);
     bool isCompleted = widget.completed == null ? false : widget.completed!;
     void toggleCompleted() {
-      setState(() {
-        isCompleted = !isCompleted;
-      });
+      habitNames.completeHabit(widget.id);
     }
 
     return Center(

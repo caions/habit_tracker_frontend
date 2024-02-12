@@ -17,19 +17,16 @@ class HabitModel {
 }
 
 class CompletedHabitModel {
-  String id;
   String habitId;
   DateTime completedDate;
 
   CompletedHabitModel({
-    required this.id,
     required this.habitId,
     required this.completedDate,
   });
 
   factory CompletedHabitModel.fromJson(Map<String, dynamic> json) {
     return CompletedHabitModel(
-      id: json['id'],
       habitId: json['habitId'],
       completedDate: DateTime.parse(json['completedDate']),
     );
@@ -37,17 +34,18 @@ class CompletedHabitModel {
 }
 
 class ApiService {
-  final Uri habitsUrl = Uri.parse('http://localhost:8000/habits');
+  final Uri _habitsUrl = Uri.parse('http://localhost:8000/habits');
+  final Uri _completedHabitsUrl =
+      Uri.parse('http://localhost:8000/habitsCompDate');
 
   Future<List<HabitModel>> getAllHabits() async {
-    final response = await http.get(habitsUrl);
+    final response = await http.get(_habitsUrl);
     if (response.statusCode == 200) {
       List<dynamic> data = jsonDecode(response.body);
       List<HabitModel> habits =
           data.map((json) => HabitModel.fromJson(json)).toList();
       return habits;
     } else {
-      print('Erro na requisição: ${response.body}');
       throw Exception('Erro na requisição: ${response.body}');
     }
   }
@@ -55,7 +53,7 @@ class ApiService {
   Future<HabitModel> createHabit(String habitName) async {
     final body = jsonEncode({'name': habitName});
     final response = await http.post(
-      habitsUrl,
+      _habitsUrl,
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -65,21 +63,35 @@ class ApiService {
       final json = jsonDecode(response.body);
       return HabitModel.fromJson(json);
     } else {
-      print('Erro na requisição: ${response.body}');
       throw Exception('Erro na requisição: ${response.body}');
     }
   }
 
   Future<List<CompletedHabitModel>> getCompletedHabits() async {
-    final Uri url = Uri.parse('http://localhost:8000/habitsCompDate');
-    final response = await http.get(url);
+    final response = await http.get(_completedHabitsUrl);
     if (response.statusCode == 200) {
       List<dynamic> data = jsonDecode(response.body);
       List<CompletedHabitModel> completedHabits =
           data.map((json) => CompletedHabitModel.fromJson(json)).toList();
       return completedHabits;
     } else {
-      print('Erro na requisição: ${response.body}');
+      throw Exception('Erro na requisição: ${response.body}');
+    }
+  }
+
+  Future<void> completeUncompletHabit(
+      String habitId, DateTime completedDate) async {
+    final body = jsonEncode(
+        {'habitId': habitId, 'completedDate': completedDate.toIso8601String()});
+
+    final response = await http.post(
+      _completedHabitsUrl,
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: body,
+    );
+    if (response.statusCode != 200) {
       throw Exception('Erro na requisição: ${response.body}');
     }
   }

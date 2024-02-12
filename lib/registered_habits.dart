@@ -40,6 +40,12 @@ class RegisteredHabits extends ChangeNotifier {
     }
   }
 
+  void completeHabit(String habitId) async {
+    DateTime now = DateTime.now().toLocal();
+    now = DateTime(now.year, now.month, now.day).toUtc();
+    await apiService.completeUncompletHabit(habitId, now);
+  }
+
   void removeHabit(String habitName) {
     habitsList.remove(habitName);
     notifyListeners();

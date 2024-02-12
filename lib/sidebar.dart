@@ -27,7 +27,7 @@ class _SideBarState extends State<SideBar> {
     final habitCardList = [];
     for (final habit in habitsList.habitsList) {
       habitCardList.add(
-        HabitCard(title: habit.name, completed: habit.completed),
+        HabitCard(id: habit.id, title: habit.name, completed: habit.completed),
       );
     }
 
