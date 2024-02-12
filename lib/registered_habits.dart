@@ -7,7 +7,7 @@ class RegisteredHabits extends ChangeNotifier {
 
   var apiService = ApiService();
 
-  Future<List<HabitModel>> getHabitNames() async {
+  Future<List<HabitModel>> getHabits() async {
     try {
       memoryHabits = await apiService.getAllHabits();
       memoryCompletedHabits = await apiService.getCompletedHabits();
@@ -18,7 +18,6 @@ class RegisteredHabits extends ChangeNotifier {
       notifyListeners();
       return memoryHabits;
     } catch (e) {
-      print('Erro ao obter hábitos: $e');
       throw Exception('Erro ao obter hábitos: $e');
     }
   }
@@ -29,7 +28,6 @@ class RegisteredHabits extends ChangeNotifier {
       memoryHabits.add(habit);
       notifyListeners();
     } catch (e) {
-      print('Erro ao criar o hábito: $e');
       throw Exception('Erro ao criar o hábito: $e');
     }
   }
@@ -38,9 +36,20 @@ class RegisteredHabits extends ChangeNotifier {
     DateTime now = DateTime.now().toLocal();
     now = DateTime(now.year, now.month, now.day).toUtc();
     await apiService.completeUncompletHabit(habitId, now);
-    final completedHabit =
-        CompletedHabitModel(habitId: habitId, completedDate: now);
-    memoryCompletedHabits.add(completedHabit);
+
+    if (memoryCompletedHabits.any((habit) => habit.habitId == habitId)) {
+      memoryCompletedHabits.removeWhere((habit) => habit.habitId == habitId);
+    } else {
+      final completedHabit =
+          CompletedHabitModel(habitId: habitId, completedDate: now);
+      memoryCompletedHabits.add(completedHabit);
+    }
+
+    for (var habit in memoryHabits) {
+      habit.completed = memoryCompletedHabits
+          .any((completedHabit) => completedHabit.habitId == habit.id);
+    }
+
     notifyListeners();
   }
 

@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   _loadHabits() async {
     var registeredHabits =
         Provider.of<RegisteredHabits>(context, listen: false);
-    await registeredHabits.getHabitNames();
+    await registeredHabits.getHabits();
   }
 
   @override

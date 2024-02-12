@@ -2,26 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:habit_tracker_frontend/registered_habits.dart';
 import 'package:provider/provider.dart';
 
-class Header extends StatelessWidget {
+class Header extends StatefulWidget {
   final Function callBack;
   const Header({super.key, required this.callBack});
 
   @override
+  State<Header> createState() => _HeaderState();
+}
+
+class _HeaderState extends State<Header> {
+  @override
   Widget build(BuildContext context) {
     callBackFn() {
-      callBack();
+      widget.callBack();
     }
 
-    var habitsList = Provider.of<RegisteredHabits>(context);
+    var habits = Provider.of<RegisteredHabits>(context);
     double percentualCompleted = 0.0;
-    int totalCompleted = habitsList.memoryHabits
-        .where((habit) => habit.completed == true)
-        .length;
+    int totalCompleted =
+        habits.memoryHabits.where((habit) => habit.completed == true).length;
     var decimalCompleted = 0.0;
-    if (habitsList.memoryHabits.isNotEmpty) {
-      decimalCompleted = totalCompleted / habitsList.memoryHabits.length;
+    if (habits.memoryHabits.isNotEmpty) {
+      decimalCompleted = totalCompleted / habits.memoryHabits.length;
     }
     percentualCompleted = (decimalCompleted * 100).roundToDouble();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
