@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_tracker_frontend/registered_habits.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class Header extends StatefulWidget {
   final Function callBack;
@@ -17,6 +18,20 @@ class _HeaderState extends State<Header> {
       widget.callBack();
     }
 
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('E, d MMM y').format(now);
+    var userName = "Caio";
+
+    String greetingMessage() {
+      if (DateTime.now().hour >= 0 && DateTime.now().hour <= 11) {
+        return 'Good Morning $userName';
+      } else if (DateTime.now().hour >= 12 && DateTime.now().hour <= 17) {
+        return 'Good Affternoon $userName';
+      } else {
+        return 'Good Eveening $userName';
+      }
+    }
+
     var habits = Provider.of<RegisteredHabits>(context);
     double percentualCompleted = 0.0;
     int totalCompleted =
@@ -30,15 +45,15 @@ class _HeaderState extends State<Header> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Good Morning, Caio',
-          style: TextStyle(color: Colors.white, fontSize: 50),
+        Text(
+          greetingMessage(),
+          style: const TextStyle(color: Colors.white, fontSize: 50),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              DateTime.now().toString(),
+              formattedDate,
               style: const TextStyle(color: Colors.white, fontSize: 20),
             ),
             OutlinedButton(
