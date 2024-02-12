@@ -75,10 +75,10 @@ class _HabitCardState extends State<HabitCard> {
                           },
                           itemBuilder: (BuildContext context) =>
                               <PopupMenuEntry<SampleItem>>[
-                            const PopupMenuItem<SampleItem>(
+                            /*     const PopupMenuItem<SampleItem>(
                               value: SampleItem.itemOne,
                               child: Text('Edit the Habit'),
-                            ),
+                            ), */
                             PopupMenuItem<SampleItem>(
                               value: SampleItem.itemTwo,
                               child: const Text('Delete the Habit'),
