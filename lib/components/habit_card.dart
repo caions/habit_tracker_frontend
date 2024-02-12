@@ -21,13 +21,23 @@ enum SampleItem { itemOne, itemTwo }
 
 class _HabitCardState extends State<HabitCard> {
   SampleItem? selectedMenu;
+  bool isCompleted = false;
+
+  @override
+  void initState() {
+    super.initState();
+    isCompleted = widget.completed == null ? false : widget.completed!;
+  }
 
   @override
   Widget build(BuildContext context) {
     var habitNames = Provider.of<RegisteredHabits>(context);
-    bool isCompleted = widget.completed == null ? false : widget.completed!;
+
     void toggleCompleted() {
       habitNames.completeHabit(widget.id);
+      setState(() {
+        isCompleted = !isCompleted;
+      });
     }
 
     return Center(
