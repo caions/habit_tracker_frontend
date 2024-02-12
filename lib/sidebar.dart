@@ -22,10 +22,9 @@ class _SideBarState extends State<SideBar> {
 
   @override
   Widget build(BuildContext context) {
-    var habitsList = Provider.of<RegisteredHabits>(context);
-
+    var habits = Provider.of<RegisteredHabits>(context);
     final habitCardList = [];
-    for (final habit in habitsList.habitsList) {
+    for (final habit in habits.memoryHabits) {
       habitCardList.add(
         HabitCard(id: habit.id, title: habit.name, completed: habit.completed),
       );

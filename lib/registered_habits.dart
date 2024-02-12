@@ -2,27 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:habit_tracker_frontend/api/api_service.dart';
 
 class RegisteredHabits extends ChangeNotifier {
-  List<HabitModel> habitsList = [];
-  List<String> completedHabitsId = [];
+  List<HabitModel> memoryHabits = [];
+  List<CompletedHabitModel> memoryCompletedHabits = [];
 
   var apiService = ApiService();
 
   Future<List<HabitModel>> getHabitNames() async {
     try {
-      var habits = await apiService.getAllHabits();
-      var completedHabits = await apiService.getCompletedHabits();
-
-      for (var completedHabit in completedHabits) {
-        completedHabitsId.add(completedHabit.habitId);
+      memoryHabits = await apiService.getAllHabits();
+      memoryCompletedHabits = await apiService.getCompletedHabits();
+      for (var habit in memoryHabits) {
+        habit.completed = memoryCompletedHabits
+            .any((completedHabit) => completedHabit.habitId == habit.id);
       }
-
-      for (var habit in habits) {
-        habit.completed = completedHabitsId.contains(habit.id);
-        habitsList.add(habit);
-      }
-
       notifyListeners();
-      return habitsList;
+      return memoryHabits;
     } catch (e) {
       print('Erro ao obter hábitos: $e');
       throw Exception('Erro ao obter hábitos: $e');
@@ -32,7 +26,7 @@ class RegisteredHabits extends ChangeNotifier {
   void addHabit(String newHabit) async {
     try {
       final habit = await apiService.createHabit(newHabit);
-      habitsList.add(habit);
+      memoryHabits.add(habit);
       notifyListeners();
     } catch (e) {
       print('Erro ao criar o hábito: $e');
@@ -44,10 +38,14 @@ class RegisteredHabits extends ChangeNotifier {
     DateTime now = DateTime.now().toLocal();
     now = DateTime(now.year, now.month, now.day).toUtc();
     await apiService.completeUncompletHabit(habitId, now);
+    final completedHabit =
+        CompletedHabitModel(habitId: habitId, completedDate: now);
+    memoryCompletedHabits.add(completedHabit);
+    notifyListeners();
   }
 
   void removeHabit(String habitName) {
-    habitsList.remove(habitName);
+    memoryHabits.remove(habitName);
     notifyListeners();
   }
 }

@@ -14,11 +14,12 @@ class Header extends StatelessWidget {
 
     var habitsList = Provider.of<RegisteredHabits>(context);
     double percentualCompleted = 0.0;
-    int totalCompleted =
-        habitsList.habitsList.where((habit) => habit.completed == true).length;
+    int totalCompleted = habitsList.memoryHabits
+        .where((habit) => habit.completed == true)
+        .length;
     var decimalCompleted = 0.0;
-    if (habitsList.habitsList.isNotEmpty) {
-      decimalCompleted = totalCompleted / habitsList.habitsList.length;
+    if (habitsList.memoryHabits.isNotEmpty) {
+      decimalCompleted = totalCompleted / habitsList.memoryHabits.length;
     }
     percentualCompleted = (decimalCompleted * 100).roundToDouble();
     return Column(
