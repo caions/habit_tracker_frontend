@@ -26,9 +26,9 @@ class _HeaderState extends State<Header> {
       if (DateTime.now().hour >= 0 && DateTime.now().hour <= 11) {
         return 'Good Morning $userName';
       } else if (DateTime.now().hour >= 12 && DateTime.now().hour <= 17) {
-        return 'Good Affternoon $userName';
+        return 'Good Afternoon $userName';
       } else {
-        return 'Good Eveening $userName';
+        return 'Good Evening $userName';
       }
     }
 
