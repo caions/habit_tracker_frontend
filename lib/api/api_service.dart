@@ -34,9 +34,14 @@ class CompletedHabitModel {
 }
 
 class ApiService {
-  final Uri _habitsUrl = Uri.parse('http://localhost:8000/habits');
-  final Uri _completedHabitsUrl =
-      Uri.parse('http://localhost:8000/habitsCompDate');
+  //String baseUrl = 'http://localhost:8000';
+  String baseUrl = 'https://habit-tracker-backend.vercel.app/';
+  late Uri _habitsUrl;
+  late Uri _completedHabitsUrl;
+  ApiService() {
+    _habitsUrl = Uri.parse('${baseUrl}habits');
+    _completedHabitsUrl = Uri.parse('${baseUrl}habitsCompDate');
+  }
 
   Future<List<HabitModel>> getAllHabits() async {
     final response = await http.get(_habitsUrl);
