@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_tracker_frontend/api/api_service.dart';
+import 'package:intl/intl.dart';
 
 class RegisteredHabits extends ChangeNotifier {
   List<HabitModel> memoryHabits = [];
@@ -11,9 +12,15 @@ class RegisteredHabits extends ChangeNotifier {
     try {
       memoryHabits = await apiService.getAllHabits();
       memoryCompletedHabits = await apiService.getCompletedHabits();
+      final today = DateTime.now();
+      final brDateFormat = DateFormat('dd/MM/yyyy');
+      final formatedDateToday = brDateFormat.format(today);
+
       for (var habit in memoryHabits) {
-        habit.completed = memoryCompletedHabits
-            .any((completedHabit) => completedHabit.habitId == habit.id);
+        habit.completed = memoryCompletedHabits.any((completedHabit) =>
+            completedHabit.habitId == habit.id &&
+            brDateFormat.format(completedHabit.completedDate) ==
+                formatedDateToday);
       }
       notifyListeners();
       return memoryHabits;
