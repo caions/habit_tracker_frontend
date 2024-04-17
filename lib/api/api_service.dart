@@ -102,12 +102,11 @@ class ApiService {
   }
 
   Future<void> deleteHabit(String habitId) async {
-    final body = jsonEncode({'id': habitId});
-    final response = await http.delete(_habitsUrl,
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: body);
+    final String deleteUrl = '$_habitsUrl/$habitId';
+
+    final response = await http.delete(Uri.parse(deleteUrl), headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+    });
     if (response.statusCode != 200) {
       throw Exception('Erro na requisição: ${response.body}');
     }
