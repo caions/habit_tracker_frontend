@@ -33,12 +33,18 @@ class _HeaderState extends State<Header> {
     }
 
     var habits = Provider.of<RegisteredHabits>(context);
+    final totalHabits = habits.memoryHabits.length;
+    final brDateFormat = DateFormat('dd/MM/yyyy');
+    final today = DateTime.now();
+    final formatedDateToday = brDateFormat.format(today);
     double percentualCompleted = 0.0;
-    int totalCompleted =
-        habits.memoryHabits.where((habit) => habit.completed == true).length;
+    int totalTodayCompleted = habits.memoryCompletedHabits
+        .where((habit) =>
+            brDateFormat.format(habit.completedDate) == formatedDateToday)
+        .length;
     var decimalCompleted = 0.0;
     if (habits.memoryHabits.isNotEmpty) {
-      decimalCompleted = totalCompleted / habits.memoryHabits.length;
+      decimalCompleted = totalTodayCompleted / totalHabits;
     }
     percentualCompleted = (decimalCompleted * 100).roundToDouble();
 
