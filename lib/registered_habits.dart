@@ -44,7 +44,13 @@ class RegisteredHabits extends ChangeNotifier {
     now = DateTime(now.year, now.month, now.day).toUtc();
     await apiService.completeUncompletHabit(habitId, now);
 
-    if (memoryCompletedHabits.any((habit) => habit.habitId == habitId)) {
+    final brDateFormat = DateFormat('dd/MM/yyyy');
+    final today = DateTime.now();
+    final formatedDateToday = brDateFormat.format(today);
+
+    if (memoryCompletedHabits.any((habit) =>
+        habit.habitId == habitId &&
+        brDateFormat.format(habit.completedDate) == formatedDateToday)) {
       memoryCompletedHabits.removeWhere((habit) => habit.habitId == habitId);
     } else {
       final completedHabit =
@@ -56,7 +62,6 @@ class RegisteredHabits extends ChangeNotifier {
       habit.completed = memoryCompletedHabits
           .any((completedHabit) => completedHabit.habitId == habit.id);
     }
-
     notifyListeners();
   }
 
